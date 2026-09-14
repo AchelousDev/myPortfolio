@@ -3,41 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Richard Fan | Software Developer</title>
+
+  <title>Richard Fan | Software Developer & Achelous Lab</title>
+
   <meta
     name="description"
-    content="Richard Fan's portfolio - Software Developer focused on Java, React, Node.js, mobile, and real-world projects."
+    content="Richard Fan's portfolio and Achelous Lab — software projects, self-hosted experiments, mobile development, automation, and full-stack work."
   />
+
   <link rel="icon" href="/favicon.ico" />
+
   <style>
-    /* -------------------------------------------------------------------------
-       Color system
-       Deep navy base with cool grays for text; blue accent for links, focus,
-       and interactive highlights. Cards use translucent white for depth
-       without heavy contrast jumps.
-       ------------------------------------------------------------------------- */
     :root {
       --bg: #08162f;
       --bg-soft: #0d1d3d;
       --card: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.085);
       --card-border: rgba(255, 255, 255, 0.12);
+
       --text: #f8fafc;
       --muted: #cbd5e1;
+
       --accent: #60a5fa;
       --accent-strong: #3b82f6;
       --accent-glow: rgba(96, 165, 250, 0.35);
+
+      --green: #6ee7b7;
+      --green-soft: rgba(110, 231, 183, 0.1);
+
       --shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-      --shadow-card-hover: 0 28px 56px rgba(0, 0, 0, 0.32);
-      --max-width: 1100px;
-      --section-space: clamp(4rem, 10vw, 5.5rem);
+      --shadow-hover: 0 28px 56px rgba(0, 0, 0, 0.32);
+
+      --max-width: 1120px;
+      --section-space: clamp(4rem, 10vw, 6rem);
+
       --radius-lg: 24px;
       --radius-md: 16px;
     }
 
-    /* -------------------------------------------------------------------------
-       Base layout & reset
-       Border-box everywhere; smooth scroll for in-page nav anchors.
-       ------------------------------------------------------------------------- */
     * {
       box-sizing: border-box;
     }
@@ -48,15 +51,69 @@
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family:
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
       background:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(96, 165, 250, 0.14), transparent 28%),
-        var(--bg);
+        radial-gradient(
+          circle at top left,
+          rgba(59, 130, 246, 0.18),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at top right,
+          rgba(96, 165, 250, 0.14),
+          transparent 28%
+        ),
+        linear-gradient(
+          180deg,
+          #08162f 0%,
+          #071329 62%,
+          #050e1f 100%
+        );
+
       color: var(--text);
       line-height: 1.65;
       font-size: 1.0625rem;
+
       -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+
+      opacity: 0.14;
+
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.02) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.02) 1px,
+          transparent 1px
+        );
+
+      background-size: 44px 44px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 90%
+        );
+
+      z-index: -1;
     }
 
     a {
@@ -64,117 +121,216 @@
       text-decoration: none;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* Centered reading column: most content uses this max width */
     .container {
       width: min(92%, var(--max-width));
       margin: 0 auto;
     }
 
-    /* -------------------------------------------------------------------------
-       Site navigation
-       Sticky bar with blur so content scrolls underneath cleanly.
-       ------------------------------------------------------------------------- */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(8, 22, 47, 0.75);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      background: rgba(8, 22, 47, 0.78);
+
+      border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
     }
 
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.125rem 0;
+
+      min-height: 68px;
+
       gap: 1rem;
     }
 
     .brand {
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+
+      gap: 0.7rem;
+
+      font-size: 1.02rem;
+      font-weight: 750;
+
+      letter-spacing: 0.015em;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 10px;
+
+      color: #dbeafe;
+
+      background:
+        rgba(96, 165, 250, 0.12);
+
+      border:
+        1px solid rgba(96, 165, 250, 0.25);
+
+      font-size: 0.78rem;
+      font-weight: 800;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.5rem;
+      align-items: center;
+
+      gap: 1.35rem;
+
       flex-wrap: wrap;
     }
 
     .nav-links a {
       color: var(--muted);
-      font-size: 0.9375rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
+
+      font-size: 0.92rem;
+      font-weight: 550;
+
+      transition:
+        color 0.2s ease;
     }
 
     .nav-links a:hover {
       color: var(--text);
     }
 
-    /* -------------------------------------------------------------------------
-       Hero section
-       Two-column grid on wide screens; stacks on narrow viewports (see media).
-       ------------------------------------------------------------------------- */
+    .nav-live {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 0.45rem;
+
+      padding:
+        0.45rem 0.72rem;
+
+      border-radius: 999px;
+
+      background: var(--green-soft);
+
+      border:
+        1px solid rgba(110, 231, 183, 0.18);
+
+      color: #b7f7d9 !important;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 0 5px rgba(110, 231, 183, 0.07),
+        0 0 14px rgba(110, 231, 183, 0.45);
+    }
+
     .hero {
       min-height: 88vh;
+
       display: flex;
       align-items: center;
-      padding: var(--section-space) 0 2.5rem;
+
+      padding:
+        var(--section-space) 0 3rem;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: clamp(1.75rem, 4vw, 2.5rem);
+
+      grid-template-columns:
+        1.2fr 0.8fr;
+
+      gap:
+        clamp(2rem, 5vw, 3rem);
+
       align-items: center;
     }
 
     .eyebrow {
-      display: inline-block;
-      margin-bottom: 1.125rem;
-      padding: 0.5rem 0.875rem;
+      display: inline-flex;
+      align-items: center;
+
+      gap: 0.5rem;
+
+      margin-bottom:
+        1.125rem;
+
+      padding:
+        0.5rem 0.875rem;
+
       border-radius: 999px;
-      background: rgba(96, 165, 250, 0.12);
-      border: 1px solid rgba(96, 165, 250, 0.25);
+
+      background:
+        rgba(96, 165, 250, 0.12);
+
+      border:
+        1px solid rgba(96, 165, 250, 0.25);
+
       color: #bfdbfe;
+
       font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-weight: 650;
+
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
     h1 {
-      margin: 0 0 0.75rem;
-      font-size: clamp(2.5rem, 6vw, 4.25rem);
-      line-height: 1.08;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      margin:
+        0 0 0.8rem;
+
+      font-size:
+        clamp(2.7rem, 6vw, 4.8rem);
+
+      line-height: 1.02;
+
+      font-weight: 820;
+
+      letter-spacing:
+        -0.035em;
     }
 
-    /* Tagline directly under the name for quick positioning */
     .hero-tagline {
-      margin: 0 0 1.25rem;
-      font-size: clamp(1.05rem, 2.2vw, 1.2rem);
-      font-weight: 600;
+      margin:
+        0 0 1.2rem;
+
+      font-size:
+        clamp(1.08rem, 2vw, 1.25rem);
+
+      font-weight: 650;
+
       color: #e2e8f0;
-      letter-spacing: -0.01em;
-      max-width: 36ch;
+
+      letter-spacing:
+        -0.01em;
     }
 
     .hero p {
-      margin: 0 0 1.125rem;
-      color: var(--muted);
-      font-size: 1.02rem;
-      max-width: 38rem;
+      margin:
+        0 0 1.05rem;
+
+      color:
+        var(--muted);
+
+      font-size:
+        1.02rem;
+
+      max-width:
+        40rem;
     }
 
     .hero-highlight {
@@ -184,8 +340,11 @@
 
     .button-row {
       display: flex;
+
       gap: 0.875rem;
+
       flex-wrap: wrap;
+
       margin-top: 1.75rem;
     }
 
@@ -193,728 +352,1753 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+
       gap: 0.5rem;
+
       min-width: 140px;
-      padding: 0.8125rem 1.25rem;
-      border-radius: var(--radius-md);
+
+      padding:
+        0.8125rem 1.25rem;
+
+      border-radius:
+        var(--radius-md);
+
       font-weight: 700;
       font-size: 0.9375rem;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
     }
 
     .btn-primary {
-      background: var(--accent-strong);
-      color: white;
-      box-shadow: var(--shadow);
+      background:
+        var(--accent-strong);
+
+      color:
+        white;
+
+      box-shadow:
+        var(--shadow);
     }
 
     .btn-primary:hover {
-      background: #2563eb;
-      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+      background:
+        #2563eb;
+
+      box-shadow:
+        0 12px 28px rgba(37, 99, 235, 0.35);
     }
 
     .btn-secondary {
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
+      border:
+        1px solid rgba(255, 255, 255, 0.18);
+
+      color:
+        var(--text);
+
+      background:
+        rgba(255, 255, 255, 0.04);
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.28);
+      background:
+        rgba(255, 255, 255, 0.1);
+
+      border-color:
+        rgba(255, 255, 255, 0.28);
+    }
+
+    .hero-card,
+    .project-card,
+    .skill-box,
+    .lab-main,
+    .lab-side,
+    .contact-box {
+      background:
+        var(--card);
+
+      border:
+        1px solid var(--card-border);
+
+      box-shadow:
+        var(--shadow);
     }
 
     .hero-card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      box-shadow: var(--shadow);
+      border-radius:
+        var(--radius-lg);
+
+      padding:
+        1.5rem;
+
+      overflow:
+        hidden;
+
+      position:
+        relative;
     }
 
-    .hero-card h3 {
-      margin-top: 0;
-      margin-bottom: 1.125rem;
-      font-size: 1.125rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.875rem;
-    }
-
-    .hero-list li {
-      color: var(--muted);
-      padding-left: 1.25rem;
-      position: relative;
-      font-size: 0.98rem;
-    }
-
-    .hero-list li::before {
+    .hero-card::after {
       content: "";
-      position: absolute;
-      left: 0;
-      top: 0.55em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
+
+      position:
+        absolute;
+
+      width:
+        170px;
+
+      height:
+        170px;
+
+      border-radius:
+        50%;
+
+      right:
+        -70px;
+
+      top:
+        -70px;
+
+      background:
+        rgba(96, 165, 250, 0.11);
+
+      filter:
+        blur(8px);
     }
 
-    /* Vertical rhythm between major sections */
+    .panel-header {
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        1rem;
+
+      margin-bottom:
+        1rem;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.77rem;
+
+      font-weight:
+        750;
+
+      letter-spacing:
+        0.08em;
+
+      text-transform:
+        uppercase;
+    }
+
+    .panel-live {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        0.45rem;
+
+      color:
+        #b7f7d9;
+    }
+
+    .terminal {
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      padding:
+        1rem 1.05rem;
+
+      border-radius:
+        15px;
+
+      background:
+        rgba(4, 12, 28, 0.62);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.07);
+
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+      font-size:
+        0.84rem;
+
+      line-height:
+        1.8;
+
+      color:
+        #dbeafe;
+    }
+
+    .term-muted {
+      color: #7489a3;
+    }
+
+    .term-accent {
+      color: #7fc4ff;
+    }
+
+    .term-green {
+      color: #7be3b5;
+    }
+
+    .mini-stats {
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap:
+        0.65rem;
+
+      margin-top:
+        0.8rem;
+    }
+
+    .mini-stat {
+      padding:
+        0.8rem;
+
+      border-radius:
+        13px;
+
+      background:
+        rgba(255, 255, 255, 0.035);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .mini-stat strong {
+      display:
+        block;
+
+      font-size:
+        1rem;
+
+      margin-bottom:
+        0.1rem;
+    }
+
+    .mini-stat span {
+      color:
+        var(--muted);
+
+      font-size:
+        0.7rem;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.07em;
+    }
+
     main > section {
-      padding: var(--section-space) 0;
+      padding:
+        var(--section-space) 0;
+    }
+
+    .section-label {
+      display:
+        block;
+
+      margin-bottom:
+        0.5rem;
+
+      color:
+        var(--accent);
+
+      font-size:
+        0.76rem;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        0.12em;
+
+      text-transform:
+        uppercase;
     }
 
     h2.section-title {
-      margin: 0 0 0.625rem;
-      font-size: clamp(1.75rem, 4vw, 2.125rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
+      margin:
+        0 0 0.625rem;
+
+      font-size:
+        clamp(1.9rem, 4vw, 2.6rem);
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        -0.025em;
+
+      line-height:
+        1.15;
     }
 
     .section-subtitle {
-      margin: 0 0 2.5rem;
-      color: var(--muted);
-      max-width: 42rem;
-      font-size: 1.02rem;
-      line-height: 1.6;
+      margin:
+        0 0 2.5rem;
+
+      color:
+        var(--muted);
+
+      max-width:
+        46rem;
+
+      font-size:
+        1.02rem;
+
+      line-height:
+        1.6;
     }
 
-    /* -------------------------------------------------------------------------
-       Projects section — card grid
-       Cards use flex column so actions sit at the bottom; hover adds shadow
-       and accent border (elevation + highlight) without large motion.
-       ------------------------------------------------------------------------- */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+    .lab-grid {
+      display:
+        grid;
+
+      grid-template-columns:
+        1.45fr 0.55fr;
+
+      gap:
+        1.5rem;
     }
 
-    .project-card {
-      display: flex;
-      flex-direction: column;
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem 1.5rem 1.375rem;
-      box-shadow: var(--shadow);
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-      min-height: 100%;
+    .lab-main {
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      min-height:
+        370px;
+
+      border-radius:
+        var(--radius-lg);
+
+      padding:
+        clamp(1.5rem, 4vw, 2rem);
     }
 
-    .project-card:hover {
-      border-color: var(--accent-glow);
-      box-shadow: var(--shadow-card-hover);
-      transform: translateY(-4px);
+    .lab-main::before {
+      content: "";
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      background:
+        radial-gradient(
+          circle at 78% 24%,
+          rgba(59, 130, 246, 0.2),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 82% 70%,
+          rgba(96, 165, 250, 0.08),
+          transparent 25%
+        );
+
+      pointer-events:
+        none;
     }
 
-    .project-card:focus-within {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
+    .lab-content {
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      max-width:
+        690px;
     }
 
-    .project-card-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.875rem;
-      margin-bottom: 1rem;
+    .live-badge {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        0.5rem;
+
+      margin-bottom:
+        1.2rem;
+
+      padding:
+        0.42rem 0.7rem;
+
+      border-radius:
+        999px;
+
+      background:
+        var(--green-soft);
+
+      border:
+        1px solid rgba(110, 231, 183, 0.18);
+
+      color:
+        #b7f7d9;
+
+      font-size:
+        0.76rem;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        0.08em;
+
+      text-transform:
+        uppercase;
     }
 
-    .project-icon {
-      flex-shrink: 0;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 12px;
-      background: rgba(96, 165, 250, 0.14);
-      border: 1px solid rgba(96, 165, 250, 0.28);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
+    .lab-main h3 {
+      margin:
+        0 0 0.75rem;
+
+      font-size:
+        clamp(2rem, 5vw, 3.2rem);
+
+      line-height:
+        1.03;
+
+      letter-spacing:
+        -0.035em;
     }
 
-    .project-icon svg {
-      width: 1.25rem;
-      height: 1.25rem;
-    }
+    .lab-main p {
+      color:
+        var(--muted);
 
-    .project-card h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      line-height: 1.3;
-    }
+      max-width:
+        620px;
 
-    .project-card > p {
-      color: var(--muted);
-      margin: 0 0 1rem;
-      font-size: 0.98rem;
-      line-height: 1.55;
-      flex-grow: 0;
-    }
-
-    .project-highlights {
-      margin: 0 0 1.125rem;
-      padding-left: 1.125rem;
-      color: #e2e8f0;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .project-highlights li + li {
-      margin-top: 0.35rem;
-    }
-
-    .project-highlights li::marker {
-      color: var(--accent);
+      margin-bottom:
+        1.2rem;
     }
 
     .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: auto;
-      padding-bottom: 1.25rem;
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        0.5rem;
+
+      margin:
+        1.2rem 0 1.6rem;
     }
 
     .tag {
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      font-size: 0.8125rem;
-      color: #dbeafe;
-      background: rgba(96, 165, 250, 0.12);
-      border: 1px solid rgba(96, 165, 250, 0.2);
+      padding:
+        0.35rem 0.65rem;
+
+      border-radius:
+        999px;
+
+      font-size:
+        0.8rem;
+
+      color:
+        #dbeafe;
+
+      background:
+        rgba(96, 165, 250, 0.12);
+
+      border:
+        1px solid rgba(96, 165, 250, 0.2);
     }
 
-    .project-card-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.625rem;
-      margin-top: auto;
-      padding-top: 0.25rem;
+    .lab-side {
+      border-radius:
+        var(--radius-lg);
+
+      padding:
+        1.4rem;
     }
 
-    .project-card-actions a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      padding: 0.625rem 1rem;
-      border-radius: 10px;
-      font-size: 0.875rem;
-      font-weight: 700;
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    .lab-side h3 {
+      margin-top:
+        0;
+
+      margin-bottom:
+        0.6rem;
     }
 
-    .project-card-actions a:hover {
-      transform: translateY(-1px);
+    .lab-side p {
+      color:
+        var(--muted);
+
+      font-size:
+        0.94rem;
     }
 
-    .btn-view {
-      flex: 1 1 auto;
-      min-width: 120px;
-      background: var(--accent-strong);
-      color: #fff;
-      border: 1px solid transparent;
+    .route-list {
+      display:
+        grid;
+
+      gap:
+        0.7rem;
+
+      margin-top:
+        1.1rem;
     }
 
-    .btn-view:hover {
-      background: #2563eb;
+    .route-item {
+      padding:
+        0.8rem 0.9rem;
+
+      border-radius:
+        12px;
+
+      background:
+        rgba(255, 255, 255, 0.035);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.07);
+
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+      font-size:
+        0.77rem;
+
+      color:
+        #b9c9da;
     }
 
-    .btn-github-card {
-      flex: 1 1 auto;
-      min-width: 120px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: var(--text);
+    .route-item span {
+      color:
+        #77c7ff;
     }
 
-    .btn-github-card:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: var(--accent-glow);
-      color: #fff;
+    .project-grid {
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap:
+        1.5rem;
     }
 
-    .btn-github-card svg,
-    .btn-view svg {
-      width: 1rem;
-      height: 1rem;
-      flex-shrink: 0;
+    .project-card {
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      border-radius:
+        var(--radius-lg);
+
+      padding:
+        1.5rem 1.5rem 1.375rem;
+
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+
+      min-height:
+        100%;
     }
 
-    /* -------------------------------------------------------------------------
-       Skills section
-       Three columns on desktop; single column when viewport is narrow.
-       ------------------------------------------------------------------------- */
+    .project-card:hover {
+      border-color:
+        var(--accent-glow);
+
+      box-shadow:
+        var(--shadow-hover);
+
+      transform:
+        translateY(-4px);
+    }
+
+    .project-card-top {
+      display:
+        flex;
+
+      align-items:
+        flex-start;
+
+      gap:
+        0.875rem;
+
+      margin-bottom:
+        1rem;
+    }
+
+    .project-icon {
+      flex-shrink:
+        0;
+
+      width:
+        2.5rem;
+
+      height:
+        2.5rem;
+
+      border-radius:
+        12px;
+
+      background:
+        rgba(96, 165, 250, 0.14);
+
+      border:
+        1px solid rgba(96, 165, 250, 0.28);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      color:
+        var(--accent);
+    }
+
+    .project-icon svg {
+      width:
+        1.25rem;
+
+      height:
+        1.25rem;
+    }
+
+    .project-card h3 {
+      margin:
+        0 0 0.5rem;
+
+      font-size:
+        1.2rem;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        -0.015em;
+
+      line-height:
+        1.3;
+    }
+
+    .project-card > p {
+      color:
+        var(--muted);
+
+      margin:
+        0 0 1rem;
+
+      font-size:
+        0.96rem;
+
+      line-height:
+        1.55;
+    }
+
+    .project-highlights {
+      margin:
+        0 0 1.1rem;
+
+      padding-left:
+        1.125rem;
+
+      color:
+        #e2e8f0;
+
+      font-size:
+        0.89rem;
+
+      line-height:
+        1.5;
+    }
+
+    .project-highlights li + li {
+      margin-top:
+        0.35rem;
+    }
+
+    .project-highlights li::marker {
+      color:
+        var(--accent);
+    }
+
+    .project-card .tags {
+      margin-top:
+        auto;
+
+      margin-bottom:
+        1rem;
+    }
+
+    .project-link {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        0.4rem;
+
+      color:
+        #dbeafe;
+
+      font-size:
+        0.86rem;
+
+      font-weight:
+        750;
+    }
+
     .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap:
+        1rem;
     }
 
     .skill-box {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-    }
+      border-radius:
+        var(--radius-lg);
 
-    .skill-box-header {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      margin-bottom: 1rem;
-    }
-
-    .skill-box-header svg {
-      width: 1.35rem;
-      height: 1.35rem;
-      color: var(--accent);
-      flex-shrink: 0;
+      padding:
+        1.35rem;
     }
 
     .skill-box h3 {
-      margin: 0;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
+      margin:
+        0 0 0.6rem;
+
+      font-size:
+        1.05rem;
     }
 
-    .skill-box ul {
-      margin: 0;
-      padding-left: 1.25rem;
-      color: var(--muted);
-      font-size: 0.98rem;
+    .skill-box p {
+      margin:
+        0;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.9rem;
     }
 
-    .skill-box li + li {
-      margin-top: 0.5rem;
-    }
-
-    /* -------------------------------------------------------------------------
-       Contact section
-       Stronger CTAs: larger tap targets, primary/ghost pairing, clear hovers.
-       ------------------------------------------------------------------------- */
     .contact-box {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.16), rgba(255, 255, 255, 0.04));
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.75rem, 4vw, 2.25rem);
-      box-shadow: var(--shadow);
-    }
+      border-radius:
+        var(--radius-lg);
 
-    .contact-box .section-subtitle {
-      margin-bottom: 0;
+      padding:
+        clamp(1.75rem, 4vw, 2.25rem);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.16),
+          rgba(255, 255, 255, 0.04)
+        );
     }
 
     .contact-links {
-      display: flex;
-      gap: 0.875rem;
-      flex-wrap: wrap;
-      margin-top: 1.75rem;
+      display:
+        flex;
+
+      gap:
+        0.875rem;
+
+      flex-wrap:
+        wrap;
+
+      margin-top:
+        1.5rem;
     }
 
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.9375rem 1.5rem;
-      border-radius: var(--radius-md);
-      font-weight: 700;
-      font-size: 0.9375rem;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .contact-link:hover {
-      transform: translateY(-2px);
-    }
-
-    .contact-link-primary {
-      background: var(--accent-strong);
-      color: #fff;
-      border: 2px solid var(--accent-strong);
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
-    }
-
-    .contact-link-primary:hover {
-      background: #2563eb;
-      border-color: #2563eb;
-      box-shadow: 0 12px 32px rgba(37, 99, 235, 0.45);
-    }
-
-    .contact-link-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      border: 2px solid rgba(255, 255, 255, 0.22);
-      color: var(--text);
-    }
-
-    .contact-link-secondary:hover {
-      background: rgba(255, 255, 255, 0.14);
-      border-color: var(--accent-glow);
-    }
-
-    .contact-link svg {
-      width: 1.125rem;
-      height: 1.125rem;
-      flex-shrink: 0;
-    }
-
-    /* -------------------------------------------------------------------------
-       Footer
-       ------------------------------------------------------------------------- */
     .footer {
-      padding: 2rem 0 3rem;
-      color: var(--muted);
-      text-align: center;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding:
+        2rem 0 3rem;
+
+      color:
+        var(--muted);
+
+      text-align:
+        center;
+
+      font-size:
+        0.9rem;
+
+      border-top:
+        1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .footer-copy {
-      margin: 0;
+    .footer p {
+      margin:
+        0.2rem 0;
     }
 
-    .footer-note {
-      margin: 0.35rem 0 0;
-      font-size: 0.85rem;
-      opacity: 0.9;
-    }
-
-    /* -------------------------------------------------------------------------
-       Responsive behavior
-       Break at ~920px: hero + grids become single column for readability.
-       Break at ~640px: tighten nav and heading scale for small phones.
-       ------------------------------------------------------------------------- */
     @media (max-width: 920px) {
       .hero-grid,
+      .lab-grid,
       .project-grid,
       .skills-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
       }
 
       .hero {
-        min-height: auto;
-        padding-top: 3.5rem;
-      }
+        min-height:
+          auto;
 
-      .project-card-actions a {
-        flex: 1 1 calc(50% - 0.35rem);
+        padding-top:
+          4rem;
       }
     }
 
     @media (max-width: 640px) {
       .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
+        min-height:
+          60px;
       }
 
-      .nav-links {
-        gap: 0.875rem;
+      .nav-links a:not(.nav-live) {
+        display:
+          none;
       }
 
       h1 {
-        font-size: 2.35rem;
+        font-size:
+          2.7rem;
       }
 
+      .button-row,
       .contact-links {
-        flex-direction: column;
+        flex-direction:
+          column;
       }
 
-      .contact-link {
-        width: 100%;
-        justify-content: center;
+      .btn {
+        width:
+          100%;
       }
 
-      .project-card-actions {
-        flex-direction: column;
-      }
-
-      .project-card-actions a {
-        width: 100%;
-        flex: none;
+      .mini-stats {
+        grid-template-columns:
+          1fr;
       }
     }
   </style>
 </head>
+
 <body>
-  <!-- Site Navigation -->
+
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="#" class="brand">Richard Fan</a>
-      <nav class="nav-links" aria-label="Primary">
+
+      <a href="#top" class="brand">
+        <span class="brand-mark">RF</span>
+        <span>Richard Fan</span>
+      </a>
+
+      <nav class="nav-links">
+
+        <a href="#lab">Lab</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
+
+        <a
+          class="nav-live"
+          href="https://eye.achelous.dev"
+          target="_blank"
+        >
+          <span class="status-dot"></span>
+          Live Demo
+        </a>
+
       </nav>
+
     </div>
   </header>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero" aria-labelledby="hero-heading">
+  <main id="top">
+
+    <section class="hero">
+
       <div class="container hero-grid">
+
         <div>
-          <span class="eyebrow">Software Developer Portfolio</span>
-          <h1 id="hero-heading">Hi, I'm Richard Fan.</h1>
-          <p class="hero-tagline">Building real-world software and full-stack applications</p>
-          <p>
-            I build practical software across
-            <span class="hero-highlight">web, mobile, and backend systems</span>.
-            My background includes Java, Spring Boot, Firebase, Android, big data projects,
-            and I’m currently expanding into React and Node.js full-stack development.
+
+          <span class="eyebrow">
+            Software Developer · Builder · Homelab Tinkerer
+          </span>
+
+          <h1>
+            Hi, I'm Richard Fan.
+          </h1>
+
+          <p class="hero-tagline">
+            I build practical software — then I keep it running.
           </p>
+
           <p>
-            I enjoy turning real ideas into working products — from quiz platforms and mobile apps
-            to automation tools and portfolio-ready web projects.
+            I work across
+            <span class="hero-highlight">
+              web, mobile, backend systems, automation, and interactive projects
+            </span>.
+            I like ideas that move past the mockup stage and become real enough to deploy, test, break, improve, and actually use.
+          </p>
+
+          <p>
+            Lately I’ve been combining development with self-hosting:
+            running experiments on my own NAS,
+            publishing them through Cloudflare,
+            and turning this portfolio into a live window into what I’m building.
           </p>
 
           <div class="button-row">
-            <a class="btn btn-primary" href="#projects">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-              View Projects
+
+            <a
+              class="btn btn-primary"
+              href="#lab"
+            >
+              Explore Achelous Lab
             </a>
-            <a class="btn btn-secondary" href="https://github.com/AchelousDev" target="_blank" rel="noreferrer">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+
+            <a
+              class="btn btn-secondary"
+              href="https://github.com/AchelousDev"
+              target="_blank"
+            >
               GitHub
             </a>
+
           </div>
+
         </div>
 
-        <aside class="hero-card" aria-label="Quick snapshot">
-          <h3>Quick Snapshot</h3>
-          <ul class="hero-list">
-            <li>Focused on Java, Spring Boot, React, Node.js, and mobile development</li>
-            <li>Built academic and practical projects with Firebase, MySQL, Spark, and Cloudflare</li>
-            <li>Interested in full-stack development, modern web apps, and real-world engineering workflows</li>
-          </ul>
+        <aside class="hero-card">
+
+          <div class="panel-header">
+
+            <span>
+              Achelous Lab
+            </span>
+
+            <span class="panel-live">
+
+              <span class="status-dot"></span>
+
+              Online
+
+            </span>
+
+          </div>
+
+          <div class="terminal">
+
+            <div>
+              <span class="term-muted">$</span>
+              <span class="term-accent">
+                whoami
+              </span>
+            </div>
+
+            <div>
+              software_developer
+            </div>
+
+            <div>
+              <span class="term-muted">$</span>
+              <span class="term-accent">
+                current_focus
+              </span>
+            </div>
+
+            <div>
+              web · mobile · self-hosting
+            </div>
+
+            <div>
+              <span class="term-muted">$</span>
+              <span class="term-accent">
+                lab_status
+              </span>
+            </div>
+
+            <div>
+              <span class="term-green">
+                ● systems operational
+              </span>
+            </div>
+
+          </div>
+
+          <div class="mini-stats">
+
+            <div class="mini-stat">
+              <strong>24/7</strong>
+              <span>Home Lab</span>
+            </div>
+
+            <div class="mini-stat">
+              <strong>Docker</strong>
+              <span>Runtime</span>
+            </div>
+
+            <div class="mini-stat">
+              <strong>Cloudflare</strong>
+              <span>Edge</span>
+            </div>
+
+          </div>
+
         </aside>
+
       </div>
+
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" aria-labelledby="projects-heading">
+    <section id="lab">
+
       <div class="container">
-        <h2 id="projects-heading" class="section-title">Featured Projects</h2>
+
+        <span class="section-label">
+          Achelous Lab
+        </span>
+
+        <h2 class="section-title">
+          Live experiments, not just screenshots.
+        </h2>
+
         <p class="section-subtitle">
-          A few projects that reflect my experience across web apps, automation, and software development.
-          This section will continue growing as I build more React and Node.js projects.
+          Some projects here are running from my own infrastructure right now.
+          The idea is simple: build interesting things, deploy them properly,
+          and learn from the parts that only show up after something goes live.
+        </p>
+
+        <div class="lab-grid">
+
+          <article class="lab-main">
+
+            <div class="lab-content">
+
+              <div class="live-badge">
+
+                <span class="status-dot"></span>
+
+                Live from my NAS
+
+              </div>
+
+              <h3>
+                God’s Eye View
+              </h3>
+
+              <p>
+                A real-time geospatial visualization experiment with a 3D globe,
+                aircraft, satellites, earthquakes, cameras, and other live data layers.
+                Self-hosted with Docker and exposed securely through Cloudflare Tunnel.
+              </p>
+
+              <div class="tags">
+
+                <span class="tag">Docker</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">CesiumJS</span>
+                <span class="tag">Cloudflare Tunnel</span>
+                <span class="tag">Self-hosted</span>
+
+              </div>
+
+              <div class="button-row">
+
+                <a
+                  class="btn btn-primary"
+                  href="https://eye.achelous.dev"
+                  target="_blank"
+                >
+                  Launch Live Demo
+                </a>
+
+                <a
+                  class="btn btn-secondary"
+                  href="https://github.com/bilawalsidhu/gods-eye-view"
+                  target="_blank"
+                >
+                  Original Project
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+          <aside class="lab-side">
+
+            <h3>
+              How the lab is wired
+            </h3>
+
+            <p>
+              The portfolio stays on Cloudflare Pages.
+              Dynamic experiments run on my Synology NAS
+              and are routed through encrypted Cloudflare tunnels.
+            </p>
+
+            <div class="route-list">
+
+              <div class="route-item">
+                <span>achelous.dev</span>
+                → Cloudflare Pages
+              </div>
+
+              <div class="route-item">
+                <span>eye.achelous.dev</span>
+                → NAS / Docker
+              </div>
+
+              <div class="route-item">
+                <span>future.*</span>
+                → more experiments
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="projects">
+
+      <div class="container">
+
+        <span class="section-label">
+          Selected Work
+        </span>
+
+        <h2 class="section-title">
+          Projects that taught me something useful.
+        </h2>
+
+        <p class="section-subtitle">
+          I’m most interested in projects with moving parts:
+          navigation, networking, automation, mobile interaction,
+          backend logic, deployment, and the small engineering details
+          that make a prototype feel complete.
         </p>
 
         <div class="project-grid">
+
           <article class="project-card">
+
             <div class="project-card-top">
-              <div class="project-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+
+              <div class="project-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 2 2 7l10 5 10-5-10-5Z"/>
+                  <path d="m2 17 10 5 10-5"/>
+                  <path d="m2 12 10 5 10-5"/>
+                </svg>
+
               </div>
-              <div>
-                <h3>Quiz / Flashcard Web App</h3>
-              </div>
+
+              <h3>
+                Wizard AOE — Unity Mobile Game
+              </h3>
+
             </div>
+
             <p>
-              A web application featuring flashcards, quizzes, and a game mode with login-based access.
-              Built around Java web development concepts with structured controllers and user features.
+              A mobile 3D game built around AI navigation,
+              combat waves, touch controls, animation systems,
+              score tracking, and environmental storytelling.
             </p>
+
             <ul class="project-highlights">
-              <li>Login-based access and organized study flows</li>
-              <li>Controllers and persistence aligned with Java web patterns</li>
-              <li>Integrated MySQL and Firebase where appropriate</li>
+
+              <li>
+                NavMesh-based warriors, monsters, guards, and followers
+              </li>
+
+              <li>
+                Joystick, swipe, tap, AOE spell casting, VFX, and Cinemachine
+              </li>
+
+              <li>
+                Spawn systems, score logic, and mobile-focused interaction
+              </li>
+
             </ul>
+
             <div class="tags">
+
+              <span class="tag">Unity</span>
+              <span class="tag">C#</span>
+              <span class="tag">NavMesh</span>
+              <span class="tag">Android</span>
+
+            </div>
+
+            <a
+              class="project-link"
+              href="https://github.com/AchelousDev/PROG38634_Project_1"
+              target="_blank"
+            >
+              View on GitHub →
+            </a>
+
+          </article>
+
+          <article class="project-card">
+
+            <div class="project-card-top">
+
+              <div class="project-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M4 17h16"/>
+                  <path d="M6 13h12"/>
+                  <path d="M8 9h8"/>
+                  <path d="M10 5h4"/>
+                </svg>
+
+              </div>
+
+              <h3>
+                BiliSmartCDN
+              </h3>
+
+            </div>
+
+            <p>
+              A browser userscript experiment for improving Bilibili playback
+              by observing CDN behavior, preserving alternate streams,
+              and adapting prefetch logic around real playback patterns.
+            </p>
+
+            <ul class="project-highlights">
+
+              <li>
+                Adaptive prefetch and CDN host selection
+              </li>
+
+              <li>
+                Seek-aware behavior to reduce wasteful buffering
+              </li>
+
+              <li>
+                Focused on practical playback stability
+              </li>
+
+            </ul>
+
+            <div class="tags">
+
+              <span class="tag">JavaScript</span>
+              <span class="tag">Tampermonkey</span>
+              <span class="tag">Networking</span>
+              <span class="tag">Streaming</span>
+
+            </div>
+
+            <a
+              class="project-link"
+              href="https://github.com/AchelousDev"
+              target="_blank"
+            >
+              Explore GitHub →
+            </a>
+
+          </article>
+
+          <article class="project-card">
+
+            <div class="project-card-top">
+
+              <div class="project-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="4" y="3" width="16" height="18" rx="2"/>
+                  <path d="M9 8h6"/>
+                  <path d="M8 13h8"/>
+                  <path d="M8 17h5"/>
+                </svg>
+
+              </div>
+
+              <h3>
+                Quiz / Flashcard Web Platform
+              </h3>
+
+            </div>
+
+            <p>
+              A structured Java web application for flashcards,
+              quizzes, login-based access, and study workflows,
+              built around practical backend concepts and persistence.
+            </p>
+
+            <ul class="project-highlights">
+
+              <li>
+                Controller-driven Java web architecture
+              </li>
+
+              <li>
+                Authentication and organized study flows
+              </li>
+
+              <li>
+                MySQL and Firebase integrations
+              </li>
+
+            </ul>
+
+            <div class="tags">
+
               <span class="tag">Java</span>
               <span class="tag">Spring Boot</span>
               <span class="tag">MySQL</span>
               <span class="tag">Firebase</span>
+
             </div>
-            <div class="project-card-actions">
-              <a class="btn-view" href="#">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                View Project
-              </a>
-              <a class="btn-github-card" href="#" aria-label="GitHub repository (placeholder)">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-              </a>
-            </div>
+
+            <a
+              class="project-link"
+              href="https://github.com/AchelousDev"
+              target="_blank"
+            >
+              Explore GitHub →
+            </a>
+
           </article>
 
           <article class="project-card">
+
             <div class="project-card-top">
-              <div class="project-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+
+              <div class="project-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 7h-9"/>
+                  <path d="M14 17H5"/>
+                  <circle cx="17" cy="17" r="3"/>
+                  <circle cx="7" cy="7" r="3"/>
+                </svg>
+
               </div>
-              <div>
-                <h3>Inventory Monitor &amp; Email Alert System</h3>
-              </div>
+
+              <h3>
+                Inventory Monitor & Alert Workflow
+              </h3>
+
             </div>
+
             <p>
-              A monitoring workflow that checks product availability and sends email alerts when stock status changes.
-              Designed to solve a practical automation problem with real deployment considerations.
+              A practical automation workflow built to monitor product availability
+              and send alerts when inventory status changes.
             </p>
+
             <ul class="project-highlights">
-              <li>Scheduled checks and reliable alert delivery</li>
-              <li>Python-driven automation with clear error handling</li>
-              <li>Structured for deployment and ongoing monitoring</li>
+
+              <li>
+                Scheduled checks and change detection
+              </li>
+
+              <li>
+                Email notifications and failure handling
+              </li>
+
+              <li>
+                Designed with continuous operation in mind
+              </li>
+
             </ul>
+
             <div class="tags">
+
               <span class="tag">Python</span>
               <span class="tag">Automation</span>
-              <span class="tag">Email Alerts</span>
-              <span class="tag">Cloud</span>
+              <span class="tag">Monitoring</span>
+
             </div>
-            <div class="project-card-actions">
-              <a class="btn-view" href="#">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                View Project
-              </a>
-              <a class="btn-github-card" href="#" aria-label="GitHub repository (placeholder)">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-              </a>
-            </div>
+
+            <a
+              class="project-link"
+              href="https://github.com/AchelousDev"
+              target="_blank"
+            >
+              Explore GitHub →
+            </a>
+
           </article>
 
           <article class="project-card">
+
             <div class="project-card-top">
-              <div class="project-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+
+              <div class="project-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M7 8h.01"/>
+                  <path d="M11 8h.01"/>
+                  <path d="M15 8h.01"/>
+                  <path d="M7 12h10"/>
+                  <path d="M7 16h6"/>
+                </svg>
+
               </div>
-              <div>
-                <h3>Next Project: React + Node.js App</h3>
-              </div>
+
+              <h3>
+                Home Lab & Self-Hosting
+              </h3>
+
             </div>
+
             <p>
-              Currently planning a new full-stack project to strengthen modern web development skills,
-              including frontend UI, backend APIs, authentication, and deployment.
+              An evolving personal infrastructure project built around Docker,
+              Synology, Home Assistant, networking, Cloudflare,
+              and self-hosted services.
             </p>
+
             <ul class="project-highlights">
-              <li>End-to-end UI, API, and auth design</li>
-              <li>Express-style backend with a document or SQL datastore</li>
-              <li>Deployment pipeline aligned with portfolio quality</li>
+
+              <li>
+                Containerized services and reverse-access architecture
+              </li>
+
+              <li>
+                NAS, IoT, cameras, and Home Assistant integrations
+              </li>
+
+              <li>
+                Cloudflare Pages + Tunnel hybrid hosting
+              </li>
+
             </ul>
+
             <div class="tags">
+
+              <span class="tag">Docker</span>
+              <span class="tag">Synology</span>
+              <span class="tag">Cloudflare</span>
+              <span class="tag">Home Assistant</span>
+
+            </div>
+
+            <a
+              class="project-link"
+              href="#lab"
+            >
+              See the live lab →
+            </a>
+
+          </article>
+
+          <article class="project-card">
+
+            <div class="project-card-top">
+
+              <div class="project-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 20h9"/>
+                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                </svg>
+
+              </div>
+
+              <h3>
+                Next: Small Products & Experiments
+              </h3>
+
+            </div>
+
+            <p>
+              I’m continuing to build smaller apps and tools
+              that are easy to ship, easy to test with real users,
+              and useful enough to keep online.
+            </p>
+
+            <ul class="project-highlights">
+
+              <li>
+                React / Node.js full-stack applications
+              </li>
+
+              <li>
+                Mobile utilities and device-aware ideas
+              </li>
+
+              <li>
+                More self-hosted demos under achelous.dev
+              </li>
+
+            </ul>
+
+            <div class="tags">
+
               <span class="tag">React</span>
               <span class="tag">Node.js</span>
-              <span class="tag">Express</span>
-              <span class="tag">MongoDB</span>
+              <span class="tag">Mobile</span>
+              <span class="tag">Product</span>
+
             </div>
-            <div class="project-card-actions">
-              <a class="btn-view" href="#">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                View Project
-              </a>
-              <a class="btn-github-card" href="#" aria-label="GitHub repository (placeholder)">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-              </a>
-            </div>
+
+            <a
+              class="project-link"
+              href="#contact"
+            >
+              Follow along →
+            </a>
+
           </article>
+
         </div>
+
       </div>
+
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" aria-labelledby="skills-heading">
+    <section id="skills">
+
       <div class="container">
-        <h2 id="skills-heading" class="section-title">Skills</h2>
+
+        <span class="section-label">
+          Stack & Interests
+        </span>
+
+        <h2 class="section-title">
+          Comfortable across layers.
+        </h2>
+
         <p class="section-subtitle">
-          My current stack is rooted in Java and mobile development, with growing focus on modern full-stack web technologies.
+          My strongest work tends to happen when software crosses boundaries:
+          frontend to backend, app to infrastructure,
+          prototype to deployment, or code to physical devices.
         </p>
 
         <div class="skills-grid">
+
           <div class="skill-box">
-            <div class="skill-box-header">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-              <h3>Frontend</h3>
-            </div>
-            <ul>
-              <li>HTML / CSS / JavaScript</li>
-              <li>React (in progress)</li>
-              <li>Responsive UI design</li>
-              <li>Basic deployment with Cloudflare Pages</li>
-            </ul>
+
+            <h3>
+              Application Development
+            </h3>
+
+            <p>
+              Java, Spring Boot, JavaScript, React,
+              Node.js, REST APIs, HTML, CSS
+            </p>
+
           </div>
 
           <div class="skill-box">
-            <div class="skill-box-header">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-              <h3>Backend</h3>
-            </div>
-            <ul>
-              <li>Java / Spring Boot</li>
-              <li>Node.js / Express (in progress)</li>
-              <li>REST API concepts</li>
-              <li>Firebase authentication and integration</li>
-            </ul>
+
+            <h3>
+              Mobile & Interactive
+            </h3>
+
+            <p>
+              Android, Unity, C#, mobile controls,
+              animation systems, 3D interaction
+            </p>
+
           </div>
 
           <div class="skill-box">
-            <div class="skill-box-header">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-              <h3>Tools &amp; Platforms</h3>
-            </div>
-            <ul>
-              <li>MySQL</li>
-              <li>Git / GitHub</li>
-              <li>Cloudflare</li>
-              <li>Android / Firebase / Spark</li>
-            </ul>
+
+            <h3>
+              Data & Services
+            </h3>
+
+            <p>
+              MySQL, Firebase, Spark,
+              authentication, structured persistence,
+              automation
+            </p>
+
           </div>
+
+          <div class="skill-box">
+
+            <h3>
+              Infrastructure & Tools
+            </h3>
+
+            <p>
+              Docker, GitHub, Cloudflare,
+              Synology, Home Assistant,
+              networking, self-hosting
+            </p>
+
+          </div>
+
         </div>
+
       </div>
+
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" aria-labelledby="contact-heading">
+    <section id="contact">
+
       <div class="container">
+
         <div class="contact-box">
-          <h2 id="contact-heading" class="section-title">Contact</h2>
+
+          <span class="section-label">
+            Contact
+          </span>
+
+          <h2 class="section-title">
+            Want to build something interesting?
+          </h2>
+
           <p class="section-subtitle">
-            I’m building this portfolio out further with more polished projects and full-stack work.
-            Feel free to connect or check out my GitHub as I continue expanding it.
+            I’m continuing to expand this portfolio
+            with more polished full-stack work,
+            mobile experiments,
+            and self-hosted projects.
           </p>
 
           <div class="contact-links">
-            <a class="contact-link contact-link-primary" href="mailto:richard.fzq@gmail.com">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+
+            <a
+              class="btn btn-primary"
+              href="mailto:richard.fzq@gmail.com"
+            >
               Email Me
             </a>
-            <a class="contact-link contact-link-secondary" href="https://github.com/AchelousDev" target="_blank" rel="noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+
+            <a
+              class="btn btn-secondary"
+              href="https://github.com/AchelousDev"
+              target="_blank"
+            >
               GitHub
             </a>
-            <a class="contact-link contact-link-secondary" href="#">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-              Resume Coming Soon
-            </a>
+
           </div>
+
         </div>
+
       </div>
+
     </section>
+
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
+
     <div class="container">
-      <p class="footer-copy">© 2026 Richard Fan.</p>
-      <p class="footer-note">Built with HTML and deployed on Cloudflare Pages</p>
+
+      <p>
+        © 2026 Richard Fan
+      </p>
+
+      <p>
+        Built on Cloudflare Pages · Experiments powered by Achelous Lab
+      </p>
+
     </div>
+
   </footer>
+
 </body>
 </html>
